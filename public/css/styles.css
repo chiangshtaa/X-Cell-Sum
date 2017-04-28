@@ -20,3 +20,11 @@ tfoot tr {
   padding: 3px;
 	background-color: yellow;
 }
+
+#add-row, #add-col {
+  border: 1px solid black;
+  min-width: 100px;
+  height: 20px;
+  padding: 3px;
+  background-color: white;
+}
