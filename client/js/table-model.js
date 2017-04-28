@@ -16,6 +16,17 @@ class TableModel {
   setValue(location, value) {
     this.data[this._getCellId(location)] = value;
   }
+
+  getColumnNumbers(column) {
+    const colNumbers = [];
+    for (let row = 0; row < this.numRows; row++) {
+      const position = { col: column, row: row };
+      if (this.getValue(position) !== undefined) {
+        colNumbers.push(this.getValue(position));
+      }
+    }
+    return colNumbers;
+  }
 }
 
 module.exports = TableModel;
