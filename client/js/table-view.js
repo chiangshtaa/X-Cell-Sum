@@ -17,7 +17,7 @@ class TableView {
     this.headerRowEl = document.querySelector('THEAD TR');
     this.sheetBodyEl = document.querySelector('TBODY');
     this.formulaBarEl = document.querySelector('#formula-bar');
-    this.sumRowEl = document.querySelector('TFOOT TR');
+    this.sumRowEl = document.querySelector('TFOOT');
   }
 
   initCurrentCell() {
@@ -76,11 +76,25 @@ class TableView {
   }
 
   renderTableFoot() {
-    removeChildren(this.sumRowEl);
-    for (let i = 0; i < this.model.numCols; i++) {
-      const td = createTD();
-      this.sumRowEl.appendChild(td);
+    const tr = createTR();
+
+    for (let col = 0; col < this.model.numCols; col++) {
+      const value = this.getColumnTotal(this.model.getColumnNumbers(col));
+      const td = createTD(value);
+      tr.appendChild(td);
     }
+    removeChildren(this.sumRowEl);
+    this.sumRowEl.appendChild(tr);
+  }
+
+
+  getColumnTotal(colNumbers) {
+    const sum = colNumbers
+      .map(element => parseInt(element, 10))
+      .filter(element => !isNaN(element))
+      .reduce((a, b) => a + parseInt(b, 10), 0);
+
+    return sum;
   }
 
   attachEventHandlers() {
@@ -92,6 +106,7 @@ class TableView {
     const value = this.formulaBarEl.value;
     this.model.setValue(this.currentCellLocation, value);
     this.renderTableBody();
+    this.renderTableFoot();
   }
 
   handleSheetClick(evt) {
