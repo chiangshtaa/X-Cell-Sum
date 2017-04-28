@@ -10,6 +10,7 @@ describe('table-view', () => {
     const html = fs.readFileSync(fixturePath, 'utf8');
     document.documentElement.innerHTML = html;
   });
+  // jest provides the server-side DOM **
 
   describe('table header', () => {
     it('has valid column header labels', () => {
