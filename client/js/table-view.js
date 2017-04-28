@@ -17,6 +17,7 @@ class TableView {
     this.headerRowEl = document.querySelector('THEAD TR');
     this.sheetBodyEl = document.querySelector('TBODY');
     this.formulaBarEl = document.querySelector('#formula-bar');
+    this.sumRowEl = document.querySelector('TFOOT TR');
   }
 
   initCurrentCell() {
@@ -37,6 +38,7 @@ class TableView {
   renderTable() {
     this.renderTableHeader();
     this.renderTableBody();
+    this.renderTableFoot();
   }
 
   renderTableHeader() {
@@ -71,6 +73,14 @@ class TableView {
     }
     removeChildren(this.sheetBodyEl);
     this.sheetBodyEl.appendChild(fragment);
+  }
+
+  renderTableFoot() {
+    removeChildren(this.sumRowEl);
+    for (let i = 0; i < this.model.numCols; i++) {
+      const td = createTD();
+      this.sumRowEl.appendChild(td);
+    }
   }
 
   attachEventHandlers() {
