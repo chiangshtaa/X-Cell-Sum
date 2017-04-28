@@ -175,7 +175,7 @@ class TableView {
 
   getColumnTotal(colNumbers) {
     const sum = colNumbers
-      .map(element => parseInt(element, 10))
+      .map(element => Number(element))
       .filter(element => !isNaN(element))
       .reduce((a, b) => a + parseInt(b, 10), 0);
 
