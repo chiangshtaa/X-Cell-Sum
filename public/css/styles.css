@@ -12,3 +12,11 @@ th, td {
 .current-cell {
 	background-color: pink;
 }
+
+tfoot tr {
+	border: 1px solid black;
+  min-width: 100px;
+  height: 25px;
+  padding: 3px;
+	background-color: yellow;
+}
