@@ -1,5 +1,5 @@
 {
-  "name": "x-cell",
+  "name": "x-cell-sum",
   "version": "1.0.0",
   "description": "world's smallest spreadsheet",
   "main": "index.js",
