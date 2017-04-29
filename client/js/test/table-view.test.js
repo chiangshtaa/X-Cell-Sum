@@ -12,6 +12,46 @@ describe('table-view', () => {
   });
   // jest provides the server-side DOM **
 
+  // describe('add button', () => {
+  //   it('adds row', () => {
+  //     // set up the initial state
+  //     const numCols = 3;
+  //     const numRows = 8;
+  //     const model = new TableModel(numCols, numRows);
+  //     const view = new TableView(model);
+  //     view.init();
+
+  //     // inspect the initial state
+  //     let addRow = document.getElementById('add-row');
+
+  //     // simulate user action
+  //     addRow.click();
+  //     let trs = document.querySelectorAll('TBODY TR');
+
+  //     // inspect the resulting state
+  //     expect(trs.length).toBe(numRows + 1);
+  //   });
+
+  //   it('adds column', () => {
+  //     // set up the initial state
+  //     const numCols = 3;
+  //     const numRows = 8;
+  //     const model = new TableModel(numCols, numRows);
+  //     const view = new TableView(model);
+  //     view.init();
+
+  //     // inspect the initial state
+  //     let addColumn = document.getElementById('add-col');
+
+  //     // simulate user action
+  //     addColumn.click();
+  //     let tds = document.querySelectorAll('TBODY TR TD');
+
+  //     // inspect the resulting state
+  //     expect(tds.length).toBe(numCols + 1);
+  //   });
+
+  // });
   describe('formula bar', () => {
     it('makes changes TO the value of the current cell', () => {
       // set up the initial state
