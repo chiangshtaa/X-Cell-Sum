@@ -102,7 +102,7 @@ class TableView {
     this.headerRowEl = document.querySelector('THEAD TR');
     this.sheetBodyEl = document.querySelector('TBODY');
     this.formulaBarEl = document.querySelector('#formula-bar');
-    this.sumRowEl = document.querySelector('TFOOT');
+    this.footerRowEl = document.querySelector('TFOOT');
     this.addRowButton = document.getElementById('add-row');
     this.addColButton = document.getElementById('add-col');
   }
@@ -170,8 +170,8 @@ class TableView {
       const td = createTD(value);
       tr.appendChild(td);
     }
-    removeChildren(this.sumRowEl);
-    this.sumRowEl.appendChild(tr);
+    removeChildren(this.footerRowEl);
+    this.footerRowEl.appendChild(tr);
   }
 
 
