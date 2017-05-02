@@ -12,46 +12,100 @@ describe('table-view', () => {
   });
   // jest provides the server-side DOM **
 
-  // describe('add button', () => {
-  //   it('adds row', () => {
-  //     // set up the initial state
-  //     const numCols = 3;
-  //     const numRows = 8;
-  //     const model = new TableModel(numCols, numRows);
-  //     const view = new TableView(model);
-  //     view.init();
+  describe('table footer', () => {
+    it('has right size', () => {
+      // set up initial state
+      const numCols = 3;
+      const numRows = 8;
+      const model = new TableModel(numCols, numRows);
+      const view = new TableView(model);
+      view.init();
 
-  //     // inspect the initial state
-  //     let addRow = document.getElementById('add-row');
+      // inspect initial state
+      let tfs = document.querySelectorAll('TFOOT TD');
 
-  //     // simulate user action
-  //     addRow.click();
-  //     let trs = document.querySelectorAll('TBODY TR');
+      // inspect resulting state
+      expect(tfs.length).toBe(numCols);
+    });
 
-  //     // inspect the resulting state
-  //     expect(trs.length).toBe(numRows + 1);
-  //   });
+    it('calculates sum of column', () => {
+      // set up initial state
+      const numCols = 3;
+      const numRows = 8;
+      const model = new TableModel(numCols, numRows);
+      const view = new TableView(model);
+      model.setValue({ col: 0, row: 0 }, '6');
+      model.setValue({ col: 0, row: 1 }, '4');
+      view.init();
 
-  //   it('adds column', () => {
-  //     // set up the initial state
-  //     const numCols = 3;
-  //     const numRows = 8;
-  //     const model = new TableModel(numCols, numRows);
-  //     const view = new TableView(model);
-  //     view.init();
+      // inspect initial state
+      let tfs = document.querySelectorAll('TFOOT TD');
 
-  //     // inspect the initial state
-  //     let addColumn = document.getElementById('add-col');
+      // inspect resulting state
+      expect(tfs[0].textContent).toBe('10');
+    });
 
-  //     // simulate user action
-  //     addColumn.click();
-  //     let tds = document.querySelectorAll('TBODY TR TD');
+    it('calculates sum even if non-number value given', () => {
+      // set up initial state
+      const numCols = 3;
+      const numRows = 8;
+      const model = new TableModel(numCols, numRows);
+      const view = new TableView(model);
+      model.setValue({ col: 0, row: 0 }, '9');
+      model.setValue({ col: 0, row: 1 }, '11');
+      model.setValue({ col: 0, row: 2 }, 'helloworld');
+      model.setValue({ col: 0, row: 3 }, '8d');
+      model.setValue({ col: 0, row: 4 }, 'four');
+      view.init();
 
-  //     // inspect the resulting state
-  //     expect(tds.length).toBe(numCols + 1);
-  //   });
+      // inspect initial state
+      let tfs = document.querySelectorAll('TFOOT TD');
 
-  // });
+      // inspect resulting state
+      expect(tfs[0].textContent).toBe('20');
+    });
+  });
+
+  describe('add button', () => {
+    it('adds row', () => {
+      // set up the initial state
+      const numCols = 3;
+      const numRows = 8;
+      const model = new TableModel(numCols, numRows);
+      const view = new TableView(model);
+      view.init();
+
+      // inspect the initial state
+      let addRow = document.getElementById('add-row');
+
+      // simulate user action
+      addRow.click();
+      const trs = document.querySelectorAll('TBODY TR');
+
+      // inspect the resulting state
+      expect(trs.length).toBe(numRows + 1);
+    });
+
+    it('adds column', () => {
+      // set up the initial state
+      const numCols = 3;
+      const numRows = 8;
+      const model = new TableModel(numCols, numRows);
+      const view = new TableView(model);
+      view.init();
+
+      // inspect the initial state
+      let addColumn = document.getElementById('add-col');
+
+      // simulate user action
+      addColumn.click();
+      let tds = document.querySelectorAll('TFOOT TD');
+
+      // inspect the resulting state
+      expect(tds.length).toBe(numCols + 1);
+    });
+
+  });
   describe('formula bar', () => {
     it('makes changes TO the value of the current cell', () => {
       // set up the initial state
