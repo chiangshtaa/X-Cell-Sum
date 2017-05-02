@@ -5,7 +5,7 @@ const TableView = require('../table-view');
 describe('table-view', () => {
 
   beforeEach(() => {
-    // load HTML sekelton from disk and parse into the DOM
+    // load HTML skeleton from disk and parse into the DOM
     const fixturePath = './client/js/test/fixtures/sheet-container.html';
     const html = fs.readFileSync(fixturePath, 'utf8');
     document.documentElement.innerHTML = html;
