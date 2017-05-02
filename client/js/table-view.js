@@ -107,13 +107,11 @@ class TableView {
   }
 
   addRow() {
-    event.preventDefault();
     this.model.numRows++;
     this.renderTableBody();
   }
 
   addColumn() {
-    event.preventDefault();
     this.model.numCols++;
     this.renderTableHeader();
     this.renderTableBody();
