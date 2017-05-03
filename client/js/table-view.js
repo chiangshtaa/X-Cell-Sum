@@ -17,6 +17,9 @@ class TableView {
     this.headerRowEl = document.querySelector('THEAD TR');
     this.sheetBodyEl = document.querySelector('TBODY');
     this.formulaBarEl = document.querySelector('#formula-bar');
+    this.footerRowEl = document.querySelector('TFOOT');
+    this.addRowButton = document.getElementById('add-row');
+    this.addColButton = document.getElementById('add-col');
   }
 
   initCurrentCell() {
@@ -37,6 +40,7 @@ class TableView {
   renderTable() {
     this.renderTableHeader();
     this.renderTableBody();
+    this.renderTableFoot();
   }
 
   renderTableHeader() {
@@ -73,15 +77,54 @@ class TableView {
     this.sheetBodyEl.appendChild(fragment);
   }
 
+  renderTableFoot() {
+    const tr = createTR();
+
+    for (let col = 0; col < this.model.numCols; col++) {
+      const value = this.getColumnTotal(this.model.getColumnNumbers(col));
+      const td = createTD(value);
+      tr.appendChild(td);
+    }
+    removeChildren(this.footerRowEl);
+    this.footerRowEl.appendChild(tr);
+  }
+
+
+  getColumnTotal(colNumbers) {
+    const sum = colNumbers
+      .map(element => Number(element))
+      .filter(element => !isNaN(element))
+      .reduce((a, b) => a + parseInt(b, 10), 0);
+
+    return sum;
+  }
+
   attachEventHandlers() {
     this.sheetBodyEl.addEventListener('click', this.handleSheetClick.bind(this));
     this.formulaBarEl.addEventListener('keyup', this.handleFormulaBarChange.bind(this));
+    this.addRowButton.addEventListener('click', this.addRow.bind(this));
+    this.addColButton.addEventListener('click', this.addColumn.bind(this));
+  }
+
+  addRow() {
+    //event.preventDefault();  
+    this.model.numRows++;
+    this.renderTableBody();
+  }
+
+  addColumn() {
+    //event.preventDefault();
+    this.model.numCols++;
+    this.renderTableHeader();
+    this.renderTableBody();
+    this.renderTableFoot();
   }
 
   handleFormulaBarChange(evt) {
     const value = this.formulaBarEl.value;
     this.model.setValue(this.currentCellLocation, value);
     this.renderTableBody();
+    this.renderTableFoot();
   }
 
   handleSheetClick(evt) {
